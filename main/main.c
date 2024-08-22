@@ -29,26 +29,22 @@ uint8_t led_level = 0;
 /* === Definiciones de funciones internas ====================================================== */
 
 /* === Definiciones de funciones externas ====================================================== */
-void app_main(void)
-{
+void app_main(void) {
     init_led();
-    while(1)
-    {
-        vTaskDelay(3000/ portTICK_PERIOD_MS);
+    while (1) {
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
         blink_led();
         printf("Led level: %u\n", led_level);
     }
 }
 
-esp_err_t init_led()
-{
+esp_err_t init_led() {
     gpio_reset_pin(led1);
     gpio_set_direction(led1, GPIO_MODE_OUTPUT);
     return ESP_OK;
 }
 
-esp_err_t blink_led(void)
-{
+esp_err_t blink_led(void) {
     led_level = !led_level;
     gpio_set_level(led1, led_level);
     return ESP_OK;
